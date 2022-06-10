@@ -35,8 +35,10 @@ def find_focus(focus):
 
 
 def rotate_cube(focus, row, clockwise, n):
-    if row:
+    if row:  # If row
         row_index = None
+
+        # Find index of row from rows list
         if focus[0] == 0 or focus[0] == 5:
             for r in rows[0:3]:
                 if focus in r:
@@ -46,16 +48,21 @@ def rotate_cube(focus, row, clockwise, n):
                 if focus in r:
                     row_index = (rows.index(r), r.index(focus))
 
+        # Append elements in the row of the focus to a temporary list
         tmp = []
         for i in range(0, len(rows[row_index[0]])):
             pos = rows[row_index[0]][i]
             tmp.append(cube[pos[0]][pos[1]][pos[2]])
+
+        # Shift elements in the row of the focus n times left if clockwise, right if counter-clockwise
         for i in range(0, len(rows[row_index[0]])):
             pos = rows[row_index[0]][i]
             cube[pos[0]][pos[1]][pos[2]] = tmp[(i + (-1)**((clockwise+1)+(focus[0] == 5))*n) % len(tmp)]
 
-    else:
+    else:  # If column
         col_index = None
+
+        # Find index of column from cols list
         if focus[0] == 0 or focus[0] == 2 or focus[0] == 4 or focus[0] == 5:
             for c in cols[0:3]:
                 if focus in c:
@@ -65,10 +72,13 @@ def rotate_cube(focus, row, clockwise, n):
                 if focus in c:
                     col_index = (cols.index(c), c.index(focus))
 
+        # Append elements in the column of the focus to a temporary list
         tmp = []
         for i in range(0, len(cols[col_index[0]])):
             pos = cols[col_index[0]][i]
             tmp.append(cube[pos[0]][pos[1]][pos[2]])
+
+        # Shift elements in the column of the focus n times left if clockwise, right if counter-clockwise
         for i in range(0, len(cols[col_index[0]])):
             pos = cols[col_index[0]][i]
             cube[pos[0]][pos[1]][pos[2]] = tmp[(i + (-1)**((clockwise+1)+(focus[0] == 1 or focus[0] == 4))*n) % len(tmp)]
@@ -85,6 +95,7 @@ if __name__ == "__main__":
             focus_pos = find_focus(focus_point)
             rotate_cube(focus_pos, rotation[0] == "R", rotation[1] == "C", int(rotation[2]))
 
+        # Print the face of the cube with the focus point
         new_focus_pos = find_focus(focus_point)
         for cube_row in cube[new_focus_pos[0]]:
             for cube_col in cube_row:
