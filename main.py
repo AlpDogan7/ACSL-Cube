@@ -35,7 +35,7 @@ def find_focus(focus):
 
 
 def rotate_cube(focus, row, clockwise, n):
-    if row:  # If row
+    if row:  # If row rotation
         row_index = None
 
         # Find index of row from rows list
@@ -85,8 +85,9 @@ def rotate_cube(focus, row, clockwise, n):
 
 
 if __name__ == "__main__":
+    # predefine the inputs for the question
     inputs = "O8 CC2\nP3 CR4\nG0 RR3\nB6 RC1\nR5 RC1 CR2\nR8 CR4 RC3\nY5 RC1 CR1 RR1 CC1\nB6 CR3 CC4 RC1 RR2\nP4 RR0 CC0 RC7 CR9\nY2 CR1 RC2 CR3 RC4 CC5 RC6 CR7 RC8 CR9".split("\n")
-
+    
     for line in inputs:
         reset_cube()
         line = line.split()
